@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct CoursePlannerApp: App {
+    @ObservedObject var viewModel = CoursePlannerViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: viewModel)
         }
     }
 }
