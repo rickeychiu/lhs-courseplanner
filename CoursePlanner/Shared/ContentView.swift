@@ -46,7 +46,7 @@ struct ContentView: View {
                 }
                             
                 YearColumn(year: Binding(get: { viewModel.schedule.years[currentYear] },
-                                         set: { newValue in viewModel.schedule.years[currentYear] = newValue }))
+                                         set: { newValue in viewModel.schedule.years[currentYear] = newValue }), validYear: currentYear)
             }
 
             Button(action: {
@@ -67,18 +67,29 @@ struct YearColumn: View {
     
     @Binding var year: [CourseIdentifier]
     @State var isSheetVisible: Int = -1
+    var validYear: Int
     
     var body: some View {
         
         VStack {
             ForEach(Array(year.enumerated()), id: \.offset) { courseIdentifierEnumerated in
                 if let course = idToCourse[courseIdentifierEnumerated.element] {
-                    CourseRow(name: course.name)
+                    CourseRow(course: course, validYear: validYear)
                         .onTapGesture {
                             isSheetVisible = courseIdentifierEnumerated.offset
                         }
-                        .sheet(isPresented: Binding(get: { isSheetVisible != -1 }, set: { _ in })) {
-                            PopupView(year: $year, isSheetVisible: $isSheetVisible)
+                        .sheet(isPresented: Binding(
+                            get: {
+                                isSheetVisible != -1
+                            },
+                            set: { isPresented in
+                                if !isPresented {
+                                    isSheetVisible = -1
+                                }
+                            })
+                        )
+                        {
+                            PopupView(year: $year, isSheetVisible: $isSheetVisible, validYear: validYear)
                         }
                 }
             }
@@ -88,14 +99,27 @@ struct YearColumn: View {
 
 struct CourseRow: View {
     
-    let name: String
+    let course: Course
+    let validYear: Int
+    
+    var properColor: Color {
+        if course.grade.contains(validYear) {
+            return .red
+        } else {
+            return .gray
+        }
+    }
+    
+    
     
     var body: some View {
-        Label(name, image: "")
+        Label(course.name, image: "")
             .foregroundColor(.white)
             .padding(.all, 8)
             .frame(width: 256)
-            .background(.red)
+            .background(properColor)
+        
+        
             .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
@@ -104,14 +128,19 @@ struct PopupView: View {
     
     @Binding var year: [CourseIdentifier]
     @Binding var isSheetVisible: Int
+    var validYear: Int
     
     var body: some View {
         ScrollView {
             ForEach(Array(idToCourse.values)) { course in
-                CourseRow(name: course.name)
+                CourseRow(course: course, validYear: validYear)
                     .onTapGesture {
-                        year[isSheetVisible] = course.id
-                        isSheetVisible = -1
+                        
+                        if course.grade.contains(validYear) {
+                            year[isSheetVisible] = course.id
+                            isSheetVisible = -1
+                        }
+                       
                     }
             }
             .padding(.horizontal, 8)
