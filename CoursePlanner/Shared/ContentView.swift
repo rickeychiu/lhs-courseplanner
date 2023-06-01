@@ -9,24 +9,54 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: CoursePlannerViewModel
-    @State var isSheetVisible: Bool = false
+    @State var currentYear: Int = 0
     
     init(viewModel: CoursePlannerViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(Array(viewModel.schedule.years.enumerated()), id: \.offset) { yearEnumerated in
-                    YearColumn(year: Binding(get: { viewModel.schedule.years[yearEnumerated.offset] },
-                                             set: { newValue in viewModel.schedule.years[yearEnumerated.offset] = newValue }),
-                               isSheetVisible: $isSheetVisible)
+        
+        HStack {
+            //L button
+                //if legal
+            Button(action: {
+                if currentYear > 0 {
+                    currentYear -= 1
                 }
-                .padding(.horizontal, 20)
+            }, label: {
+                Image(systemName: "chevron.left.circle")
+            })
+            .buttonStyle(PlainButtonStyle())
             
+            //year column
+            
+            VStack {
+                if currentYear == 0 {
+                    Text("Freshman")
+                }
+                else if currentYear == 1 {
+                    Text("Sophomore")
+                }
+                else if currentYear == 2 {
+                    Text("Junior")
+                }
+                else if currentYear == 3 {
+                    Text("Senior")
+                }
+                            
+                YearColumn(year: Binding(get: { viewModel.schedule.years[currentYear] },
+                                         set: { newValue in viewModel.schedule.years[currentYear] = newValue }))
             }
-            .padding(.vertical, 10)
+
+            Button(action: {
+                if currentYear < 3 {
+                    currentYear += 1
+                }
+            }, label: {
+                Image(systemName: "chevron.right.circle")
+            })
+            .buttonStyle(PlainButtonStyle())
         }
         
     }
@@ -36,7 +66,7 @@ struct ContentView: View {
 struct YearColumn: View {
     
     @Binding var year: [CourseIdentifier]
-    @Binding var isSheetVisible: Bool
+    @State var isSheetVisible: Int = -1
     
     var body: some View {
         
@@ -45,10 +75,10 @@ struct YearColumn: View {
                 if let course = idToCourse[courseIdentifierEnumerated.element] {
                     CourseRow(name: course.name)
                         .onTapGesture {
-                            isSheetVisible = true
+                            isSheetVisible = courseIdentifierEnumerated.offset
                         }
-                        .sheet(isPresented: $isSheetVisible) {
-                            PopupView(year: $year, index: courseIdentifierEnumerated.offset, isSheetVisible: $isSheetVisible)
+                        .sheet(isPresented: Binding(get: { isSheetVisible != -1 }, set: { _ in })) {
+                            PopupView(year: $year, isSheetVisible: $isSheetVisible)
                         }
                 }
             }
@@ -73,16 +103,15 @@ struct CourseRow: View {
 struct PopupView: View {
     
     @Binding var year: [CourseIdentifier]
-    var index: Int
-    @Binding var isSheetVisible: Bool
+    @Binding var isSheetVisible: Int
     
     var body: some View {
         ScrollView {
             ForEach(Array(idToCourse.values)) { course in
                 CourseRow(name: course.name)
                     .onTapGesture {
-                        year[index] = course.id
-                        isSheetVisible = false
+                        year[isSheetVisible] = course.id
+                        isSheetVisible = -1
                     }
             }
             .padding(.horizontal, 8)
