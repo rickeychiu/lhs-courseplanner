@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel: CoursePlannerViewModel
+    //@ObservedObject var viewModel: CoursePlannerViewModel
+    @Binding var document: CoursePlannerDocument
     @State var currentYear: Int = 0
     
+    /*
     init(viewModel: CoursePlannerViewModel) {
         self.viewModel = viewModel
     }
+    */
     
     var body: some View {
         
@@ -44,9 +47,9 @@ struct ContentView: View {
                 else if currentYear == 3 {
                     Text("Senior")
                 }
-                            
-                YearColumn(year: Binding(get: { viewModel.schedule.years[currentYear] },
-                                         set: { newValue in viewModel.schedule.years[currentYear] = newValue }), validYear: currentYear)
+                
+                YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
+                                         set: { newValue in document.schedule.years[currentYear] = newValue }), validYear: currentYear)
             }
 
             Button(action: {

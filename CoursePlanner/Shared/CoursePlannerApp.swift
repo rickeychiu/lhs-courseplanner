@@ -9,11 +9,17 @@ import SwiftUI
 
 @main
 struct CoursePlannerApp: App {
-    @ObservedObject var viewModel = CoursePlannerViewModel()
+    //@ObservedObject var viewModel = CoursePlannerViewModel()
     
     var body: some Scene {
+        /*
         WindowGroup {
             ContentView(viewModel: viewModel)
+        }
+        */
+        
+        DocumentGroup(newDocument: CoursePlannerDocument()) { file in
+            ContentView(document: file.$document)
         }
     }
 }
