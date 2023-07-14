@@ -140,13 +140,43 @@ struct CourseRow: View {
     }
     
     var body: some View {
-        Label(course.name, image: "")
-            .foregroundColor(course.department == .zero ? .gray : .white)
-            .padding(.all, 8)
-            .frame(width: 256)
-            .background(properColor)
-            .cornerRadius(16)
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray, lineWidth: course.department == .zero ? 2 : 0))
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Label(course.name, image: "")
+                    .font(.system(size: 24))
+                    .foregroundColor(course.department == .zero ? .gray : .white)
+                
+                Spacer()
+                
+                Group {
+                    if course.type == .honors {
+                        Image(systemName: "graduationcap.circle")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    else if course.type == .ap {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                }
+                .frame(width: 24, height: 24)
+                .foregroundColor(course.department == .zero ? .gray : .white)
+                .padding(.trailing, 8)
+            }
+            
+            Text(course.description)
+                .font(.system(size: 12))
+                .foregroundColor(course.department == .zero ? .gray : .white)
+                .truncationMode(.tail)
+                .frame(height: 48, alignment: .topLeading)
+                .padding(.horizontal, 8)
+        }
+        .padding(.all, 8)
+        //.frame(width: 256)
+        .background(properColor)
+        .cornerRadius(16)
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray, lineWidth: course.department == .zero ? 2 : 0))
     }
 }
 
