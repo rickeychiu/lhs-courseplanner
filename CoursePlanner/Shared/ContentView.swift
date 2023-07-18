@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+struct Constants {
+    static let tabHeight: CGFloat = 0
+    static let headerHeight: CGFloat = 0
+    static let spacingHeight: CGFloat = 8
+}
+
 struct ContentView: View {
+
+    
     //@ObservedObject var viewModel: CoursePlannerViewModel
     @Binding var document: CoursePlannerDocument
     @State var currentYear: Int = 0
@@ -17,10 +25,16 @@ struct ContentView: View {
         self.viewModel = viewModel
     }
     */
+    var mainView: some View {
+            YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
+                                     set: { newValue in document.schedule.years[currentYear] = newValue }), validYear: currentYear)
+    }
     
     var body: some View {
         
-        HStack {
+        VStack {
+            
+            /*
             //L button
                 //if legal
             Button(action: {
@@ -31,27 +45,33 @@ struct ContentView: View {
                 Image(systemName: "chevron.left.circle")
             })
             .buttonStyle(PlainButtonStyle())
+            */
             
             //year column
             
-            VStack {
-                if currentYear == 0 {
-                    Text("Freshman")
+            /*
+            ScrollView {
+                VStack {
+                    if currentYear == 0 {
+                        Text("Freshman")
+                    }
+                    else if currentYear == 1 {
+                        Text("Sophomore")
+                    }
+                    else if currentYear == 2 {
+                        Text("Junior")
+                    }
+                    else if currentYear == 3 {
+                        Text("Senior")
+                    }
+                    
+                    YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
+                                             set: { newValue in document.schedule.years[currentYear] = newValue }), validYear: currentYear)
                 }
-                else if currentYear == 1 {
-                    Text("Sophomore")
-                }
-                else if currentYear == 2 {
-                    Text("Junior")
-                }
-                else if currentYear == 3 {
-                    Text("Senior")
-                }
-                
-                YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
-                                         set: { newValue in document.schedule.years[currentYear] = newValue }), validYear: currentYear)
             }
-
+            */
+            
+            /*
             Button(action: {
                 if currentYear < 3 {
                     currentYear += 1
@@ -60,8 +80,33 @@ struct ContentView: View {
                 Image(systemName: "chevron.right.circle")
             })
             .buttonStyle(PlainButtonStyle())
+             */
+            TabView(selection: $currentYear) {
+                mainView
+                    .tag(0)
+                    .tabItem {
+                        Label("Freshman", systemImage: "9.circle")
+                    }
+                
+                mainView
+                    .tag(1)
+                    .tabItem {
+                        Label("Sophomore", systemImage: "10.circle")
+                    }
+                
+                mainView
+                    .tag(2)
+                    .tabItem {
+                        Label("Junior", systemImage: "11.circle")
+                    }
+                
+                mainView
+                    .tag(3)
+                    .tabItem {
+                        Label("Senior", systemImage: "12.circle")
+                    }
+            }
         }
-        
     }
 
 }
@@ -72,31 +117,42 @@ struct YearColumn: View {
     @State var isSheetVisible: Int = -1
     var validYear: Int
     
+    func courseRowHeight(totalHeight: CGFloat) -> CGFloat {
+        let spacingHeight: CGFloat = CGFloat((max(year.count - 1, 0))) * Constants.spacingHeight
+        let divisions: CGFloat = CGFloat((max(year.count, 1)))
+        return (totalHeight - Constants.tabHeight - Constants.headerHeight - spacingHeight) / divisions
+    }
+    
     var body: some View {
-        
-        VStack {
-            ForEach(Array(year.enumerated()), id: \.offset) { courseIdentifierEnumerated in
-                if let course = idToCourse[courseIdentifierEnumerated.element] {
-                    CourseRow(course: course, validYear: validYear)
-                        .onTapGesture {
-                            isSheetVisible = courseIdentifierEnumerated.offset
-                        }
-                        .sheet(isPresented: Binding(
-                            get: {
-                                isSheetVisible != -1
-                            },
-                            set: { isPresented in
-                                if !isPresented {
-                                    isSheetVisible = -1
-                                }
-                            })
-                        )
-                        {
-                            PopupView(year: $year, isSheetVisible: $isSheetVisible, validYear: validYear)
-                        }
+        GeometryReader { proxy in
+            VStack(spacing: Constants.spacingHeight) {
+                ForEach(Array(year.enumerated()), id: \.offset) { courseIdentifierEnumerated in
+                    if let course = idToCourse[courseIdentifierEnumerated.element] {
+                        CourseRow(course: course, validYear: validYear)
+                            .frame(width: proxy.size.width - 2 * Constants.spacingHeight,
+                                   height: courseRowHeight(totalHeight: proxy.size.height))
+                            .padding(.horizontal, Constants.spacingHeight)
+                            .onTapGesture {
+                                isSheetVisible = courseIdentifierEnumerated.offset
+                            }
+                            .sheet(isPresented: Binding(
+                                get: {
+                                    isSheetVisible != -1
+                                },
+                                set: { isPresented in
+                                    if !isPresented {
+                                        isSheetVisible = -1
+                                    }
+                                })
+                            )
+                            {
+                                PopupView(year: $year, isSheetVisible: $isSheetVisible, validYear: validYear)
+                            }
+                    }
                 }
             }
         }
+        
     }
 }
 
@@ -171,9 +227,10 @@ struct CourseRow: View {
                 .truncationMode(.tail)
                 .frame(height: 48, alignment: .topLeading)
                 .padding(.horizontal, 8)
+            
+            Spacer()
         }
         .padding(.all, 8)
-        //.frame(width: 256)
         .background(properColor)
         .cornerRadius(16)
         .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray, lineWidth: course.department == .zero ? 2 : 0))

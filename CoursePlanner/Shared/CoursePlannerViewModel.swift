@@ -177,6 +177,8 @@ enum CourseType {
 }
 
 enum Department: Comparable {
+    case zero
+    
     case english
     case social
     case pe
@@ -190,7 +192,7 @@ enum Department: Comparable {
     case living
     case misc
     
-    case zero
+    
 }
 
 class Course: Identifiable {
@@ -217,11 +219,16 @@ class Course: Identifiable {
 
 extension Course: Comparable {
     static func < (lhs: Course, rhs: Course) -> Bool {
-        return lhs.department < rhs.department
+        if (lhs.department != rhs.department) {
+            return lhs.department < rhs.department
+        } else {
+            return lhs.id < rhs.id
+        }
+        
     }
     
     static func == (lhs: Course, rhs: Course) -> Bool {
-        return lhs.department == rhs.department
+        return lhs.id == rhs.id
     }
 }
 
