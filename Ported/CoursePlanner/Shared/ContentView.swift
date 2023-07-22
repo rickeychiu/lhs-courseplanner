@@ -40,54 +40,7 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            
-            /*
-            //L button
-                //if legal
-            Button(action: {
-                if currentYear > 0 {
-                    currentYear -= 1
-                }
-            }, label: {
-                Image(systemName: "chevron.left.circle")
-            })
-            .buttonStyle(PlainButtonStyle())
-            */
-            
-            //year column
-            
-            /*
-            ScrollView {
-                VStack {
-                    if currentYear == 0 {
-                        Text("Freshman")
-                    }
-                    else if currentYear == 1 {
-                        Text("Sophomore")
-                    }
-                    else if currentYear == 2 {
-                        Text("Junior")
-                    }
-                    else if currentYear == 3 {
-                        Text("Senior")
-                    }
-                    
-                    YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
-                                             set: { newValue in document.schedule.years[currentYear] = newValue }), validYear: currentYear)
-                }
-            }
-            */
-            
-            /*
-            Button(action: {
-                if currentYear < 3 {
-                    currentYear += 1
-                }
-            }, label: {
-                Image(systemName: "chevron.right.circle")
-            })
-            .buttonStyle(PlainButtonStyle())
-             */
+        
             TabView(selection: $currentYear) {
                 mainView
                     .tag(0)
@@ -135,7 +88,9 @@ struct YearColumn: View {
             VStack(spacing: Constants.spacingHeight) {
                 ForEach(Array(year.enumerated()), id: \.offset) { courseIdentifierEnumerated in
                     if let course = idToCourse[courseIdentifierEnumerated.element] {
-                        CourseRow(course: course, validYear: validYear)
+                        CourseRow(course: course,
+                                  validYear: validYear,
+                                  showDescription: false)
                             .frame(width: proxy.size.width - 2 * Constants.spacingHeight,
                                    height: courseRowHeight(totalHeight: proxy.size.height))
                             .padding(.horizontal, Constants.spacingHeight)
@@ -167,6 +122,7 @@ struct CourseRow: View {
     
     let course: Course
     let validYear: Int
+    let showDescription: Bool
     
     var properColor: Color {
         if course.grade.contains(validYear) {
@@ -225,15 +181,18 @@ struct CourseRow: View {
                 }
                 .frame(width: 24, height: 24)
                 .foregroundColor(course.department == .zero ? .gray : .white)
-                .padding(.trailing, 8)
+                //.padding(.trailing, 8)
             }
             
-            Text(course.description)
-                .font(.system(size: 12))
-                .foregroundColor(course.department == .zero ? .gray : .white)
-                .truncationMode(.tail)
-                .frame(height: 48, alignment: .topLeading)
-                .padding(.horizontal, 8)
+            if (showDescription) {
+                Text(course.description)
+                    .font(.system(size: 12))
+                    .foregroundColor(course.department == .zero ? .gray : .white)
+                    .truncationMode(.tail)
+                    .frame(height: 48, alignment: .topLeading)
+                    .padding(.horizontal, 8)
+            }
+           
             
             Spacer()
         }
@@ -258,7 +217,7 @@ struct PopupView: View {
                 VStack {
                     //ForEach(Array(idToCourse.values.sorted())) { course in
                     ForEach(Array(idToCourse.values.sorted().filter({ $0.grade.contains(validYear) }))) { course in
-                        CourseRow(course: course, validYear: validYear)
+                        CourseRow(course: course, validYear: validYear, showDescription: true)
                             .onTapGesture {
                                 
                                 if course.grade.contains(validYear) {

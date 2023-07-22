@@ -267,9 +267,3 @@ struct Schedule: Decodable, Encodable {
         }
     
 }
-
-//extension Schedule: Decodable {
-//
-//}
-//
-
