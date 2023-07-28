@@ -159,42 +159,63 @@ struct CourseRow: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Label(course.name, image: "")
-                    .font(.system(size: 24))
-                    .foregroundColor(course.department == .zero ? .gray : .white)
-                
-                Spacer()
-                
-                Group {
-                    if course.type == .honors {
-                        Image(systemName: "graduationcap.circle")
-                            .resizable()
-                            .scaledToFit()
+        Group {
+            if (course.department == .zero) {
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Label(course.name, image: "")
+                            .font(.system(size: 24))
+                            .foregroundColor(course.department == .zero ? .gray : .white)
+                        
+                        Spacer()
                     }
-                    else if course.type == .ap {
-                        Image(systemName: "star.circle")
-                            .resizable()
-                            .scaledToFit()
-                    }
+                    
+                    Spacer()
                 }
-                .frame(width: 24, height: 24)
-                .foregroundColor(course.department == .zero ? .gray : .white)
-                //.padding(.trailing, 8)
             }
-            
-            if (showDescription) {
-                Text(course.description)
-                    .font(.system(size: 12))
-                    .foregroundColor(course.department == .zero ? .gray : .white)
-                    .truncationMode(.tail)
-                    .frame(height: 48, alignment: .topLeading)
-                    .padding(.horizontal, 8)
+            else {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Label(course.name, image: "")
+                            .font(.system(size: 24))
+                            .foregroundColor(course.department == .zero ? .gray : .white)
+                        
+                        Spacer()
+                        
+                        Group {
+                            if course.type == .honors {
+                                Image(systemName: "graduationcap.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            else if course.type == .ap {
+                                Image(systemName: "star.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                        }
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(course.department == .zero ? .gray : .white)
+                        //.padding(.trailing, 8)
+                    }
+                    
+                    if (showDescription) {
+                        Text(course.description)
+                            .font(.system(size: 12))
+                            .foregroundColor(course.department == .zero ? .gray : .white)
+                            .truncationMode(.tail)
+                            .frame(height: 48, alignment: .topLeading)
+                            .padding(.horizontal, 8)
+                    }
+                   
+                    
+                    Spacer()
+                }
             }
-           
-            
-            Spacer()
         }
         .padding(.all, 8)
         .background(properColor)
@@ -229,6 +250,7 @@ struct PopupView: View {
                             }
                     }
                 }
+                .padding(.vertical, 8)
                 
                 Spacer()
             }
