@@ -18,7 +18,6 @@ struct CoursePlannerDocument: FileDocument {
     var schedule: Schedule
 
     init(schedule: Schedule = Schedule()) {
-     
         self.schedule = schedule
     }
 
@@ -29,7 +28,6 @@ struct CoursePlannerDocument: FileDocument {
         guard let data = configuration.file.regularFileContents,
               let schedule = try? JSONDecoder().decode(Schedule.self, from: data)
         else {
-
             throw CocoaError(.fileReadCorruptFile)
         }
         
@@ -42,7 +40,6 @@ struct CoursePlannerDocument: FileDocument {
             return .init(regularFileWithContents: data)
         }
         else {
-
             throw CocoaError(.fileReadCorruptFile)
         }
     }

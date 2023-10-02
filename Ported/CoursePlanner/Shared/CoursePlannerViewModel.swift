@@ -10,7 +10,7 @@ import SwiftUI
 let idToCourse: [CourseIdentifier: Course] = [
     
     //ADD
-    "0000": Course(name: "+", id: "0000", description: "", recommended: [], department: .zero, type: .other, grade: [0,1,2,3]),
+    "0000": Course(name: "+", id: "0000", description: "   ", recommended: [], department: .zero, type: .other, grade: [0,1,2,3]),
     
     //ENGLISH
     "1010P": Course(name: "Lit & Writing", id: "1010P", description: "This course integrates the study of fictional and non-fictional literature with instruction in the writing process.", recommended: [], department: Department.english, type: CourseType.standard, grade: [0]),
@@ -36,7 +36,7 @@ let idToCourse: [CourseIdentifier: Course] = [
     "1750AP": Course(name: "AP U.S. History", id: "1750AP", description: "Recommended: “B” or better in their previous history class. APUSH covers the entire scope of US history unlike USH.", recommended: [], department: Department.social, type: CourseType.ap, grade: [2]),
     "1835P": Course(name: "Economics (1/2)", id: "1835P", description: "The course covers economic principles such as production, supply and demand, profits, distribution of goods, competition, etc.", recommended: [], department: Department.social, type: CourseType.standard, grade: [3]),
     "1845P": Course(name: "U.S. Government (2/2)", id: "1845P", description: "The goals of this course are to give an understanding of democratic processes and the values and social framework that support them.", recommended: [], department: Department.social, type: CourseType.standard, grade: [3]),
-    "1855AP": Course(name: "AP U.S. Gov/Politics (2/2)", id: "1855AP", description: "Recommended: “B” or better in previous history class. It's designed to give students an understanding of the system of US gov/politics.", recommended: [], department: Department.social, type: CourseType.ap, grade: [3]),
+    "1855AP": Course(name: "AP U.S. Gov (2/2)", id: "1855AP", description: "Recommended: “B” or better in previous history class. It's designed to give students an understanding of the system of US gov/politics.", recommended: [], department: Department.social, type: CourseType.ap, grade: [3]),
     
     //PE
     "2510": Course(name: "P.E. 9", id: "2510", description: "A basic course required of all freshmen, which includes instruction in basic skills, basic rules, history and etiquette in sports.", recommended: [], department: Department.pe, type: CourseType.other, grade: [0]),
@@ -44,7 +44,7 @@ let idToCourse: [CourseIdentifier: Course] = [
     "2720": Course(name: "P.E. Racquet Sports", id: "2720", description: "Recommended: PE 9. This course is designed for students interested in developing skills in the various racquet sports.", recommended: ["2510"], department: Department.pe, type: CourseType.other, grade: [1, 2, 3]),
     "2740": Course(name: "P.E. Weight Training", id: "2740", description: "Recommended: PE 9. This course is designed for those students interested in developing body strength for advanced sports skills.", recommended: ["2510"], department: Department.pe, type: CourseType.other, grade: [1, 2, 3]),
     "2780": Course(name: "P.E. Total Fitness", id: "2780", description: "Recommended: PE 9. The course emphasizes aerobic activity with elements of all five of the components of fitness.", recommended: ["2510"], department: Department.pe, type: CourseType.other, grade: [1, 2, 3]),
-    "2590": Course(name: "P.E. Athletics*", id: "2590", description: "Required: A member of an interscholastic athletic squad and completed the Competitive Sports Participation Agreement.", recommended: [], department: Department.pe, type: CourseType.other, grade: [1, 2, 3]),
+    "2590": Course(name: "P.E. Athletics", id: "2590", description: "Required: A member of an interscholastic athletic squad and completed the Competitive Sports Participation Agreement.", recommended: [], department: Department.pe, type: CourseType.other, grade: [1, 2, 3]),
     
     //ART
     
@@ -70,10 +70,10 @@ let idToCourse: [CourseIdentifier: Course] = [
     "3120AP": Course(name: "AP Biology", id: "3120P", description: "Recommended: Biology and Chemistry. AP Biology is the equivalent of a two-semester college introductory biology course.", recommended: ["3110P", "3610P", "3620H"], department: Department.science, type: CourseType.ap, grade: [2, 3]),
     "3130P": Course(name: "Physiology", id: "3130P", description: "Recommended: Biology and Chemistry. This is a course investigating the functional and interdependent phenomena of the human body.", recommended: ["3110P", "3610P", "3620H"], department: Department.science, type: CourseType.standard, grade: [2, 3]),
     "3610P": Course(name: "Chemistry", id: "3610P", description: "Recommended: Biology and Algebra 1 (can be concurrent). Students will learn about Earth’s systems and humans.", recommended: ["3110P"], department: Department.science, type: CourseType.standard, grade: [1, 2, 3]),
-    "3620H": Course(name: "Chemistry - Honors", id: "3620H", description: "Recommended: Biology and Alg 1 (can be concurrent). The honors course has an increased application of math and concepts.", recommended: [], department: Department.science, type: CourseType.honors, grade: [1, 2, 3]),
-    "3630AP": Course(name: "AP Chemistry", id: "3630AP", description: "Recommended: Chemistry Honors and Alg 2. Students taking this course should have a successful background in math and basic chemistry.", recommended: ["3620H"], department: Department.science, type: CourseType.ap, grade: [2, 3]),
+    "3620H": Course(name: "Chemistry Honors", id: "3620H", description: "Recommended: Biology and Alg 1 (can be concurrent). The honors course has an increased application of math and concepts.", recommended: [], department: Department.science, type: CourseType.honors, grade: [1, 2, 3]),
+    "3630AP": Course(name: "AP Chemistry", id: "3630AP", description: "Recommended: Chemistry H and Alg 2. Students should have a successful background in math and basic chemistry.", recommended: ["3620H"], department: Department.science, type: CourseType.ap, grade: [2, 3]),
     "3710P": Course(name: "Physics", id: "3710P", description: "Recommended: Biology and Algebra 1. Students will deepen their understanding of the universe through the lens of physics.", recommended: ["3110P"], department: Department.science, type: CourseType.standard, grade: [1, 2, 3]),
-    "3720H": Course(name: "Physics - Honors", id: "3720H", description: "Recommended: Biology and Algebra 2 (can be concurrent). The honors course has an increased application of math and concepts.", recommended: ["3110P"], department: Department.science, type: CourseType.honors, grade: [1, 2, 3]),
+    "3720H": Course(name: "Physics Honors", id: "3720H", description: "Recommended: Biology and Algebra 2 (can be concurrent). The honors course has an increased application of math and concepts.", recommended: ["3110P"], department: Department.science, type: CourseType.honors, grade: [1, 2, 3]),
     "3730AP": Course(name: "AP Physics C: Mech", id: "3730AP", description: "Recommended: Pre-Calc H and Physics H.  Students taking this  should have a successful background in math and physics.", recommended: ["2420H", "3720H"], department: Department.science, type: CourseType.ap, grade: [2, 3]),
     "3850P": Course(name: "Science & Society", id: "3850P", description: "Recommended: Biology. This course is a PBL course where students work on a variety of projects related to societal issues.", recommended: [], department: Department.science, type: CourseType.standard, grade: [1, 2, 3]),
     
@@ -83,7 +83,7 @@ let idToCourse: [CourseIdentifier: Course] = [
     "2310P": Course(name: "Algebra 2", id: "2310P", description: "Recommended: completion of Alg 1 and Geo. Alg 2 expands and refines the mathematical content of Alg 1 and Geometry.", recommended: ["2210P", "2230P"], department: Department.math, type: CourseType.standard,  grade: [0, 1, 2, 3]),
     "2320P": Course(name: "Alg 2/Trignometry", id: "2320P", description: "Recommended: Mastery of Alg 1 and Geo. Alg 2/Trig is for students who plan to maximize the amount of math studied in high school.", recommended: ["2210P", "2230P"], department: Department.math, type: CourseType.standard,  grade: [0, 1, 2, 3]),
     "2390P": Course(name: "Pre-Calculus", id: "2390P", description: "Recommended: Completion of Alg 2/2-Trig. This focuses on the study of functions, their modeling applications, etc.", recommended: ["2310P", "2320P"], department: Department.math, type: CourseType.standard,  grade: [0, 1, 2, 3]),
-    "2420H": Course(name: "Pre-Calculus Honors", id: "2420H", description: "Recommended: Mastery of both Geo and Alg 2/Trig. Pre-Calc H is for students who plan to maximize the amount of math studied in high school.", recommended: ["2310P", "2320P"], department: Department.math, type: CourseType.honors,  grade: [0, 1, 2, 3]),
+    "2420H": Course(name: "Pre-Calculus Honors", id: "2420H", description: "Recommended: Mastery of both Geo & Alg 2/Trig. Pre-Calc H is for students who plan to max the amount of math studied in high school.", recommended: ["2310P", "2320P"], department: Department.math, type: CourseType.honors,  grade: [0, 1, 2, 3]),
     "2430AP": Course(name: "AP Calculus AB", id: "2430AP", description: "Recommended: Pre-Calc. This course covers 2 college quarters of limits, differentiation and integration.", recommended: ["2390P", "2420H"], department: Department.math, type: CourseType.ap,  grade: [0, 1, 2, 3]),
     "2440AP": Course(name: "AP Calculus BC", id: "2440AP", description: "Recommended: Pre-Calc H. This course covers 3 college quarters of limits, differentiation, integration, and series.", recommended: ["2420H"], department: Department.math, type: CourseType.ap,  grade: [0, 1, 2, 3]),
     "2460AP": Course(name: "AP Statistics", id: "2460AP", description: "Recommended: Completion of Alg 2 or higher. The course explores data, planning studys, probability, and inferential reasoning.", recommended: ["2310P", "2320P", "2390P", "2420H", "2430AP", "2440AP"], department: Department.math, type: CourseType.ap,  grade: [1, 2, 3]),
@@ -100,11 +100,11 @@ let idToCourse: [CourseIdentifier: Course] = [
     
     //MUSIC
     "7030P": Course(name: "B Choir", id: "7030P", description: "Recommended: For students with little or no prior music experience. This choir is a beginning vocal group.", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "7040P": Course(name: "Adv. Treble Choir*", id: "7040P", description: "Audition only – see instructor for additional info. The course content includes work on tone production and quality, breathing, diction, etc.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
-    "7060P": Course(name: "A Choir*", id: "7060P", description: "Recommended: Audition or approval of instructor. The students will experience a large mixed choir.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
+    "7040P": Course(name: "Adv. Treble Choir", id: "7040P", description: "Audition only – see instructor for additional info. The course content includes work on tone production and quality, breathing, diction, etc.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
+    "7060P": Course(name: "A Choir", id: "7060P", description: "Recommended: Audition or approval of instructor. The students will experience a large mixed choir.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
     "7120P": Course(name: "Concert Band", id: "7120P", description: "Recommended: Approval of instructor. Refinement of tone and a more advanced understanding of basic performance techniques are stressed.", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1]),
     "7130P": Course(name: "Symphonic Band", id: "7130P", description: "Recommended: Audition/pproval of instructor. This is a continuation of Concert Band work, with more detail in individual skills.", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "7140P": Course(name: "Wind Ensemble*", id: "7140P", description: "Recommended: Audition or approval of instructor. This select group of about 50 is formed by audition only.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
+    "7140P": Course(name: "Wind Ensemble", id: "7140P", description: "Recommended: Audition or approval of instructor. This select group of about 50 is formed by audition only.", recommended: [], department: Department.music, type: CourseType.standard, grade: [1, 2, 3]),
     "7240P": Course(name: "Orchestra", id: "7240P", description: "Recommended: 1–2 years of experience. Pperformance of ensemble/orchestra literature, string skills, and musicianship.", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "7250P": Course(name: "Chamber Orchestra", id: "7250P", description: "Audition required. For advanced students who will study and perform string/orchestral literature on their instrument.", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "7320P": Course(name: "Music Genesis", id: "7320P", description: "This course is open to all students interested in tmusic through the study of Rock, Jazz and Classical music. ", recommended: [], department: Department.music, type: CourseType.standard, grade: [0, 1, 2, 3]),
@@ -114,27 +114,27 @@ let idToCourse: [CourseIdentifier: Course] = [
     "4310P": Course(name: "Spanish 1", id: "4310P", description: "Students will learn to address elements of daily life in both oral and written form and learn the basic grammar to convey meaning.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4320P": Course(name: "Spanish 2", id: "4320P", description: "Recommended: C or better in Level 1, or language skills check. The primary goal is development of communicative competence.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4330P": Course(name: "Spanish 3", id: "4330P", description: "Recommended: C or better in Level 2, or language skills check. Students will improve communicative competence.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "4340H": Course(name: "Spanish 4 - Honors", id: "4340H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: [], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
-    "4350AP": Course(name: "AP Spanish Lang/Culture", id: "4350AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: [], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
+    "4340H": Course(name: "Spanish 4 Honors", id: "4340H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: [], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
+    "4350AP": Course(name: "AP Spanish", id: "4350AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: [], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
 
     
     "4110P": Course(name: "French 1", id: "4110P", description: "Students will learn to address elements of daily life in both oral and written form and learn the basic grammar to convey meaning.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4120P": Course(name: "French 2", id: "4120P", description: "Recommended: C or better in Level 1, or language skills check. The primary goal is development of communicative competence.", recommended: ["4110P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4130P": Course(name: "French 3", id: "4130P", description: "Recommended: C or better in Level 2, or language skills check. Students will improve communicative competence.", recommended: ["4120P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "4140H": Course(name: "French 4 - Honors", id: "4140H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4130P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
-    "4150AP": Course(name: "AP French Lang/Culture", id: "4150AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4140H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
+    "4140H": Course(name: "French 4 Honors", id: "4140H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4130P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
+    "4150AP": Course(name: "AP French", id: "4150AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4140H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
     
     "4010P": Course(name: "Japanese 1", id: "4010P", description: "Students will learn to address elements of daily life in both oral and written form and learn the basic grammar to convey meaning.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4020P": Course(name: "Japanese 2", id: "4020P", description: "Recommended: C or better in Level 1, or language skills check. The primary goal is development of communicative competence.", recommended: ["4010P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4030P": Course(name: "Japanese 3", id: "4030P", description: "Recommended: C or better in Level 2, or language skills check. Students will improve communicative competence.", recommended: ["4020P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "4040H": Course(name: "Japanese 4 - Honors", id: "4040H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4030P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
-    "4050AP": Course(name: "AP Japanese Lang/Culture", id: "4050AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4040H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
+    "4040H": Course(name: "Japanese 4 Honors", id: "4040H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4030P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
+    "4050AP": Course(name: "AP Japanese", id: "4050AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4040H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
     
     "4410P": Course(name: "Chinese 1", id: "4410P", description: "Students will learn to address elements of daily life in both oral and written form and learn the basic grammar to convey meaning.", recommended: [], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4420P": Course(name: "Chinese 2", id: "4420P", description: "Recommended: C or better in Level 1, or language skills check. The primary goal is development of communicative competence.", recommended: ["4410P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
     "4430P": Course(name: "Chinese 3", id: "4430P", description: "Recommended: C or better in Level 2, or language skills check. Students will improve communicative competence.", recommended: ["4420P"], department: Department.wl, type: CourseType.standard, grade: [0, 1, 2, 3]),
-    "4440H": Course(name: "Chinese 4 - Honors", id: "4440H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4430P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
-    "4450AP": Course(name: "AP Chinese Lang/Culture", id: "4450AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4440H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
+    "4440H": Course(name: "Chinese 4 Honors", id: "4440H", description: "Recommended: C or better in Level 3, or language skills check. The course includes advanced grammar and vocabulary.", recommended: ["4430P"], department: Department.wl, type: CourseType.honors, grade: [0, 1, 2, 3]),
+    "4450AP": Course(name: "AP Chinese", id: "4450AP", description: "Recommended: C or better in Level 4 Honors, or language skills check. Students demonstrate an advanced level of proficiency.", recommended: ["4440H"], department: Department.wl, type: CourseType.ap, grade: [0, 1, 2, 3]),
     
     
     //BUSINESS
@@ -150,17 +150,15 @@ let idToCourse: [CourseIdentifier: Course] = [
     //NON-DEPARTMENTAL
     "8040": Course(name: "Work Experience", id: "8040", description: "Students who are employed may choose to enroll in Work Experience with priority given to seniors who need credits.", recommended: [], department: Department.misc, type: CourseType.other, grade: [2, 3]),
     "8280": Course(name: "IS: STEM Research", id: "8280", description: "STEAM research course is a unique opportunity for students to engage in interdisciplinary research to understand complex problems.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1]),
-    "8290": Course(name: "Leadership*", id: "8040", description: "Required: Students must hold some type of office through elections or interviews. Students will be involved in school politics and events.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1, 2, 3]),
-    "8390": Course(name: "Engage*", id: "8390", description: "This course is an opportunity for students to receive extra help on schoolwork from Engage Tutors.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1, 2, 3]),
-    "8400": Course(name: "Engage Tutor*", id: "8400", description: "Recommended: Permission of supervising teacher/staff. This course is an opportunity for students to give school service by tutoring.", recommended: [], department: Department.misc, type: CourseType.other, grade: [2, 3]),
+    "8290": Course(name: "Leadership", id: "8040", description: "Required: Students must hold some type of office through elections or interviews. Students will be involved in school politics and events.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1, 2, 3]),
+    "8390": Course(name: "Engage", id: "8390", description: "This course is an opportunity for students to receive extra help on schoolwork from Engage Tutors.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1, 2, 3]),
+    "8400": Course(name: "Engage Tutor", id: "8400", description: "Recommended: Permission of supervising teacher/staff. This course is an opportunity for students to give school service by tutoring.", recommended: [], department: Department.misc, type: CourseType.other, grade: [2, 3]),
     "9020": Course(name: "TA/Student Clerk", id: "9020", description: "Recommended: Approval from staff member whom the assistant/clerk will be supporting. Students will work with admins/teachers.", recommended: [], department: Department.misc, type: CourseType.other, grade: [1, 2, 3]),
     "9030": Course(name: "EL Teacher Asst", id: "9030", description: "Recommended: Approval from staff member who the assistant will be supporting. Students will work with teachers/staff.", recommended: [], department: Department.misc, type: CourseType.other, grade: [2, 3]),
     "9070": Course(name: "Technology Asst", id: "9070", description: "Recommended: Approval from staff member whom the assistant/clerk will be supporting. Students will work with admins/teachers.", recommended: [], department: Department.misc, type: CourseType.other, grade: [1, 2, 3]),
     "8380": Course(name: "Yearbook", id: "8380", description: "Students will work on formulating the Lynbrook Yearbook. This involves interviews, graphic design, and more.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1, 2, 3]),
-    "1595": Course(name: "Intro to Ethnic Studies (1/2)", id: "1595", description: "Intro to Ethnic Studies is a 9th grade, one semester course. Students will examine complexities of identity and foster empathy.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1]),
+    "1595": Course(name: "Ethnic Studies (1/2)", id: "1595", description: "Intro to Ethnic Studies is a 9th grade, one semester course. Students will examine complexities of identity and foster empathy.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1]),
     "3025": Course(name: "Health (2/2)", id: "3025", description: "Health  provides students with the knowledge and skills to make gooddecisions for themselves and others.", recommended: [], department: Department.misc, type: CourseType.other, grade: [0, 1])
-    
-    
 ]
 
 class CoursePlannerViewModel: ObservableObject {
@@ -182,7 +180,6 @@ enum CourseType {
 
 enum Department: Comparable {
     case zero
-    
     case english
     case social
     case pe
@@ -195,8 +192,6 @@ enum Department: Comparable {
     case business
     case living
     case misc
-    
-    
 }
 
 class Course: Identifiable {
@@ -208,7 +203,9 @@ class Course: Identifiable {
     let type: CourseType
     let grade: [Int]
     
-    init(name: String, id: CourseIdentifier, description: String, recommended: [CourseIdentifier], department: Department, type: CourseType, grade: [Int]) {
+    init(name: String, id: CourseIdentifier, description: String,
+         recommended: [CourseIdentifier], department: Department,
+         type: CourseType, grade: [Int]) {
         self.name = name
         self.id = id
         self.description = description
@@ -217,8 +214,6 @@ class Course: Identifiable {
         self.type = type
         self.grade = grade
     }
-    
-    
 }
 
 extension Course: Comparable {
@@ -228,7 +223,6 @@ extension Course: Comparable {
         } else {
             return lhs.id < rhs.id
         }
-        
     }
     
     static func == (lhs: Course, rhs: Course) -> Bool {
@@ -249,21 +243,14 @@ struct Schedule: Decodable, Encodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         years = try values.decode([[CourseIdentifier]].self, forKey: .years)
-       
-        
     }
 
     func encode(to encoder: Encoder) throws {
-  
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(years, forKey: .years)
-     
-        
-
     }
  
     enum CodingKeys: String, CodingKey {
-            case years
-        }
-    
+        case years
+    }
 }

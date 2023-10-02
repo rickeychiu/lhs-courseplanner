@@ -8,33 +8,27 @@
 import SwiftUI
 
 struct Constants {
-    static let tabHeight: CGFloat = 0
-    static let headerHeight: CGFloat = 0
     static let spacingHeight: CGFloat = 8
 }
 
 struct ContentView: View {
 
-    
-    //@ObservedObject var viewModel: CoursePlannerViewModel
     @Binding var document: CoursePlannerDocument
     @State var currentYear: Int = 0
     
-    /*
-    init(viewModel: CoursePlannerViewModel) {
-        self.viewModel = viewModel
+    var backgroundColor: Color {
+        #if os(macOS)
+        return Color(nsColor: NSColor(named: NSColor.Name("BackgroundColor")) ?? NSColor.white)
+        #else
+        return Color(uiColor: UIColor(named: "BackgroundColor") ?? UIColor.white)
+        #endif
     }
-    */
+    
     var mainView: some View {
-            YearColumn(year: Binding(get: {
-                
-                document.schedule.years[currentYear]
-            },
-                                     set: { newValue in
-                print("! setting binding")
-                document.schedule.years[currentYear] = newValue
-                
-            }), validYear: currentYear)
+            YearColumn(year: Binding(get: { document.schedule.years[currentYear] },
+                                     set: { newValue in document.schedule.years[currentYear] = newValue }),
+                       validYear: currentYear)
+            .background(backgroundColor)
     }
     
     var body: some View {
@@ -68,7 +62,6 @@ struct ContentView: View {
             }
         }
     }
-
 }
 
 struct YearColumn: View {
@@ -78,9 +71,9 @@ struct YearColumn: View {
     var validYear: Int
     
     func courseRowHeight(totalHeight: CGFloat) -> CGFloat {
-        let spacingHeight: CGFloat = CGFloat((max(year.count - 1, 0))) * Constants.spacingHeight
+        let spacingHeight: CGFloat = CGFloat((max(year.count, 0))) * Constants.spacingHeight
         let divisions: CGFloat = CGFloat((max(year.count, 1)))
-        return (totalHeight - Constants.tabHeight - Constants.headerHeight - spacingHeight) / divisions
+        return (totalHeight - spacingHeight) / divisions
     }
     
     var body: some View {
@@ -114,7 +107,6 @@ struct YearColumn: View {
                 }
             }
         }
-        
     }
 }
 
@@ -127,40 +119,112 @@ struct CourseRow: View {
     var properColor: Color {
         if course.grade.contains(validYear) {
             if course.department == .english {
-                return Color(.sRGB, red: 237/255, green: 27/255, blue: 29/255, opacity: 1)
-            } else if course.department == .social {
-                return Color(.sRGB, red: 253/255, green: 185/255, blue: 49/255, opacity: 1)
-            } else if course.department == .pe {
-                return Color(.sRGB, red: 108/255, green: 213/255, blue: 217/255, opacity: 1)
-            }  else if course.department == .art {
-                return Color(.sRGB, red: 89/255, green: 191/255, blue: 180/255, opacity: 1)
-            } else if course.department == .science {
-                return Color(.sRGB, red: 102/255, green: 177/255, blue: 79/255, opacity: 1)
-            } else if course.department == .math {
-                return Color(.sRGB, red: 1/255, green: 110/255, blue: 180/255, opacity: 1)
-            } else if course.department == .drama {
-                return Color(.sRGB, red: 215/255, green: 117/255, blue: 173/255, opacity: 1)
-            } else if course.department == .music {
-                return Color(.sRGB, red: 250/255, green: 163/255, blue: 87/255, opacity: 1)
-            } else if course.department == .wl {
-                return Color(.sRGB, red: 241/255, green: 112/255, blue: 154/255, opacity: 1)
-            } else if course.department == .business {
-                return Color(.sRGB, red: 1/255, green: 157/255, blue: 217/255, opacity: 1)
-            } else if course.department == .living {
-                return Color(.sRGB, red: 53/255, green: 189/255, blue: 119/255, opacity: 1)
-            } else if course.department == .misc {
-                return Color(.sRGB, red: 242/255, green: 95/255, blue: 99/255, opacity: 1)
-            } else if course.department == .zero {
-                return Color(.sRGB, red: 249/255, green: 193/255, blue: 203/255, opacity: 0)
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentEnglishColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentEnglishColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .social {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentSocialColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentSocialColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .pe {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentPEColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentPEColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .art {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentArtColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentArtColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .science {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentScienceColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentScienceColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .math {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentMathColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentMathColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .drama {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentDramaColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentDramaColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .music {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentMusicColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentMusicColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .wl {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentWLColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentWLColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .business {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentBusinessColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentBusinessColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .living {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentLivingColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentLivingColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .misc {
+                #if os(macOS)
+                return Color(nsColor: NSColor(named: NSColor.Name("DepartmentMiscColor")) ?? NSColor.white)
+                #else
+                return Color(uiColor: UIColor(named: "DepartmentMiscColor") ?? UIColor.white)
+                #endif
+            }
+            else if course.department == .zero {
+                return Color.gray.opacity(0.00001)
             }
         }
+        
         return Color(.sRGB, red: 200/255, green: 200/255, blue: 200/255, opacity: 1)
-            
+    }
+    
+    var isEmptyCourse: Bool {
+        return course.department == .zero
+    }
+    
+    var shadowColor: Color {
+        #if os(macOS)
+        return Color(nsColor: NSColor(named: NSColor.Name("ShadowColor")) ?? NSColor.white)
+        #else
+        return Color(uiColor: UIColor(named: "ShadowColor") ?? UIColor.white)
+        #endif
     }
     
     var body: some View {
         Group {
-            if (course.department == .zero) {
+            if isEmptyCourse {
                 VStack {
                     Spacer()
                     
@@ -169,7 +233,8 @@ struct CourseRow: View {
                         
                         Label(course.name, image: "")
                             .font(.system(size: 24))
-                            .foregroundColor(course.department == .zero ? .gray : .white)
+                            .foregroundColor(isEmptyCourse ? .gray : .white)
+                            .frame(height: showDescription ? 24 + 48 : 24)
                         
                         Spacer()
                     }
@@ -182,7 +247,7 @@ struct CourseRow: View {
                     HStack {
                         Label(course.name, image: "")
                             .font(.system(size: 24))
-                            .foregroundColor(course.department == .zero ? .gray : .white)
+                            .foregroundColor(isEmptyCourse ? .gray : .white)
                         
                         Spacer()
                         
@@ -199,28 +264,40 @@ struct CourseRow: View {
                             }
                         }
                         .frame(width: 24, height: 24)
-                        .foregroundColor(course.department == .zero ? .gray : .white)
-                        //.padding(.trailing, 8)
+                        .foregroundColor(isEmptyCourse ? .gray : .white)
                     }
                     
-                    if (showDescription) {
+                    if showDescription {
                         Text(course.description)
                             .font(.system(size: 12))
-                            .foregroundColor(course.department == .zero ? .gray : .white)
+                            .foregroundColor(isEmptyCourse ? .gray : .white)
                             .truncationMode(.tail)
                             .frame(height: 48, alignment: .topLeading)
                             .padding(.horizontal, 8)
                     }
-                   
                     
                     Spacer()
                 }
             }
         }
         .padding(.all, 8)
-        .background(properColor)
+        .background(isEmptyCourse ? Color.gray.opacity(0.00001) : properColor)
         .cornerRadius(16)
-        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray, lineWidth: course.department == .zero ? 2 : 0))
+        .overlay(
+            Group {
+                if isEmptyCourse {
+                    RoundedRectangle(cornerRadius: 16).stroke(shadowColor, lineWidth: 4)
+                        .blur(radius: 4)
+                        .offset(x: 2, y: 2)
+                        .mask(RoundedRectangle(cornerRadius: 16)
+                    )
+                }
+                else {
+                    EmptyView()
+                }
+            }
+        )
+        .shadow(color: isEmptyCourse ? Color.clear : shadowColor, radius: 4, x: 4, y: 4)
     }
 }
 
@@ -236,17 +313,14 @@ struct PopupView: View {
                 Spacer()
                 
                 VStack {
-                    //ForEach(Array(idToCourse.values.sorted())) { course in
                     ForEach(Array(idToCourse.values.sorted().filter({ $0.grade.contains(validYear) }))) { course in
                         CourseRow(course: course, validYear: validYear, showDescription: true)
                             .onTapGesture {
-                                
                                 if course.grade.contains(validYear) {
                                     year[isSheetVisible] = course.id
                                     print("! course changed")
                                     isSheetVisible = -1
                                 }
-                               
                             }
                     }
                 }
@@ -256,5 +330,4 @@ struct PopupView: View {
             }
         }
     }
-
 }
