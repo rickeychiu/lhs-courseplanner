@@ -9,7 +9,7 @@ Built to streamline the process of selecting and organizing classes throughout h
 - View a visual roadmap of your academic plan
 - Track completed vs planned courses
 - Customizable course list for electives and special programs
-- Built using **Swift** and **UIKit** (or SwiftUI — update if needed)
+- Built using **Swift** and **SwiftUI/UIKit**
 - Supports basic data persistence (e.g. UserDefaults / Core Data)
 - Styled with the Neumorphism Design Philosophy
 
